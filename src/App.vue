@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<PlayerListing/>
+		<PlayerListing :players="players" />
 
 	</div>
 </template>
@@ -16,21 +16,10 @@ export default {
 	data() {
 		return {
 			playerInput: 'everything working?',
-			players: [],
+			players: ['Malte'],
 		};
 	},
 	methods: {
-		addPlayer: function addPlayer() {
-			if (this.playerInput === '') {
-				return;
-			}
-
-			this.players.push(this.playerInput);
-			this.playerInput = '';
-		},
-		removePlayer: function removePlayer(index) {
-			this.players.splice(index, 1);
-		},
 	},
 };
 </script>

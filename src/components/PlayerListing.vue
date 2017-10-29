@@ -6,7 +6,7 @@
 			<button class="secondary" @click="addPlayer">+ SPIELER HINZUFÜGEN +</button>
 
 			<!-- List players -->
-			<div v-for="(player, index) in players" v-bind:key="player" class="listing">
+			<div v-for="(player, index) in playersInternal" v-bind:key="player" class="listing">
 				<p> {{ player }} </p>
 				<span class="delete" @click="removePlayer(index)">x</span>
 			</div>
@@ -19,23 +19,37 @@
 
 <script>
 export default {
+	props: ['players'],
 	data() {
 		return {
 			playerInput: 'everything working?',
-			players: [],
+			playersInternal: [],
 		};
 	},
+	created: function copyFromProp() {
+		// We initially sync the internalValue with the value passed in by the parent
+		this.playersInternal = this.players;
+	},
+	// watch: {
+	// 	playersInternal: function passPlayers() {
+	// 		// When the internal value changes, we $emit an event. Because this event is
+	// 		// named 'input', v-model will automatically update the parent value
+	// 		this.$emit('input', this.playersInternal);
+	// 	},
+	// },
 	methods: {
 		addPlayer: function addPlayer() {
 			if (this.playerInput === '') {
 				return;
 			}
 
-			this.players.push(this.playerInput);
+			this.playersInternal.push(this.playerInput);
 			this.playerInput = '';
 		},
 		removePlayer: function removePlayer(index) {
-			this.players.splice(index, 1);
+			this.playersInternal.splice(index, 1);
+		},
+		next: function next() {
 		},
 	},
 };

@@ -15,9 +15,9 @@ new Vue({
 });
 
 // Clear after module reload
-window.addEventListener('message', () => {
-	if (process.env.NODE_ENV !== 'production') {
-		// eslint-disable-next-line
-		console.clear();
-	}
-});
+// window.addEventListener('message', () => {
+// 	if (process.env.NODE_ENV !== 'production') {
+// 		// eslint-disable-next-line
+// 		console.clear();
+// 	}
+// });
