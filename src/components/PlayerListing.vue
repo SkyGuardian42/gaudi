@@ -2,7 +2,7 @@
 	<section>
 		<div class="top">
 			<!-- Input components -->
-			<input type="text" v-model="playerInput" @keyup.enter="addPlayer">
+			<input type="text" v-model="playerInput" @keyup.enter="addPlayer" placeholder="Namen hier reinschreiben">
 			<button class="secondary" @click="addPlayer">+ SPIELER HINZUFÜGEN +</button>
 
 			<!-- List players -->
@@ -13,7 +13,7 @@
 		</div>
 
 		<!-- Next screen -->
-		<button class="primary">ANFANGEN</button>
+		<button class="primary" @click="next">ANFANGEN</button>
 	</section>
 </template>
 
@@ -22,7 +22,7 @@ export default {
 	props: ['players'],
 	data() {
 		return {
-			playerInput: 'everything working?',
+			playerInput: '',
 			playersInternal: [],
 		};
 	},
@@ -50,6 +50,10 @@ export default {
 			this.playersInternal.splice(index, 1);
 		},
 		next: function next() {
+			if (this.players.length < 2) {
+				return;
+			}
+			this.$emit('next');
 		},
 	},
 };
@@ -75,31 +79,6 @@ input[type="text"] {
 	font-family: 'Poppins', sans-serif;
 	padding: .6rem; 
 	width: 100%;
-}
-button {
-	background: $black;
-	border: none;
-	color: #fff;
-	cursor: pointer;
-	text-decoration: underline;
-	font-size: 1.2rem;
-	font-family: "Poppins", sans-serif;
-	margin: 0;
-	padding: .6rem;
-	width: 100%;
-	-webkit-appearance: none;
-	&.primary {
-		background: #0ec325;
-		&:hover {
-			background: #0da220;
-		}
-	}
-	&.secondary {
-		background: #3e17d4;
-		&:hover {
-			background: #3b1abb;
-		}
-	}
 }
 .listing {
 	$red: #ea2828;
